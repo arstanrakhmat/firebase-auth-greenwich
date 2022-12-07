@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "364974673239",
+    "project_id": "greenwich-firebase-auth",
+    "storage_bucket": "greenwich-firebase-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364974673239:android:8eb337acd99493971f0212",
+        "android_client_info": {
+          "package_name": "com.example.greenwichfirebaseauth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364974673239-ut8670bmjhkmmn39iktm273kkjip2lh8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.greenwichfirebaseauth",
+            "certificate_hash": "ac102461d9212afbe51418857f2776b89cba83e0"
+          }
+        },
+        {
+          "client_id": "364974673239-35b3gmsov76ucdshiu25ol4f01i3eq2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD92DknUC7aZjbpVl8xRGHqtoRbFtET8V8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "364974673239-35b3gmsov76ucdshiu25ol4f01i3eq2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

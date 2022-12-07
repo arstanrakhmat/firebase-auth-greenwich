@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Greenwich Firebase Auth</string>
+    <string name="greenwich">Greenwich</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Вход</string>
+    <string name="ame">Имя</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="logginingIn">Войти</string>
+    <string name="isItFirstTime">Впервые у нас?</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="doRegister">Регистрация</string>
+    <string name="btnRegister">Зарегистрироваться</string>
+    <string name="hasAccount">Уже есть аккаунт?</string>
+    <string name="canNotBeEmpty">Поля не могут быть пустыми</string>
+    <string name="aprooveReg">Подтверждение регистрации</string>
+    <string name="toYourNumber">На ваш номер</string>
+    <string name="_996_550_28_85_53">+996 (550) 28-85-53</string>
+    <string name="has_been_sent">был отправлен смс-код для подтверждения</string>
+    <string name="enter_the_code">Введите код подтверждения</string>
+    <string name="incorrect_password">Введеный код неверен</string>
+    <string name="back">Назад</string>
+    <string name="resend_code">Отправить код повторно через 00:45</string>
+
+</resources>
