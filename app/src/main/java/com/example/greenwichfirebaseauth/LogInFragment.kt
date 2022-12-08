@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.greenwichfirebaseauth.databinding.FragmentLogInBinding
+import com.google.firebase.auth.FirebaseAuth
 import java.util.regex.Pattern
 
 class LogInFragment : Fragment() {
@@ -40,7 +41,7 @@ class LogInFragment : Fragment() {
 //            } else {
 //                Toast.makeText(requireContext(), "INVALID", Toast.LENGTH_LONG).show()
 //            }
-            findNavController().navigate(R.id.registrationFragment)
+            findNavController().navigate(R.id.action_logInFragment_to_registrationFragment)
         }
     }
 

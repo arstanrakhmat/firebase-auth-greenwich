@@ -227,7 +227,7 @@
             android:visibility="gone" />
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_register"
             android:layout_width="@dimen/width_300dp"
             android:layout_height="@dimen/height_50dp"
             android:layout_marginStart="@dimen/margin_55dp"
@@ -257,6 +257,7 @@
             android:textSize="@dimen/text_size_18sp" />
 
         <TextView
+            android:id="@+id/resentOtp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

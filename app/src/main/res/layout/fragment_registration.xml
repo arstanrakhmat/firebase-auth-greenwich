@@ -158,7 +158,6 @@
                 android:background="@drawable/edit_text_background"
                 android:gravity="center"
                 android:hint="+996  - - -  - -  - -  - -"
-                android:inputType="phone"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16sp" />
 
