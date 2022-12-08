@@ -36,12 +36,6 @@
         android:name="com.example.greenwichfirebaseauth.VerificationFragment"
         android:label="VerificationFragment" >
         <argument
-            android:name="id"
-            app:argType="string" />
-        <argument
-            android:name="token"
-            app:argType="com.google.firebase.auth.PhoneAuthProvider$ForceResendingToken" />
-        <argument
             android:name="phoneNumber"
             app:argType="string" />
     </fragment>

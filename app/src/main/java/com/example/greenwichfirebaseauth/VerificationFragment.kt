@@ -39,8 +39,6 @@ class VerificationFragment : Fragment() {
         binding = FragmentVerificationBinding.inflate(layoutInflater, container, false)
         auth = FirebaseAuth.getInstance()
 
-        otp = args.id
-        resendingToken = args.token
         phoneNumber = args.phoneNumber
 
         return binding.root
@@ -49,6 +47,7 @@ class VerificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sendVerificationCode(phoneNumber)
         addTextChangeListener()
         clickListeners()
         resendOTPvVisibility()
@@ -71,7 +70,7 @@ class VerificationFragment : Fragment() {
                     } else {
                         Toast.makeText(
                             requireContext(),
-                            "Please Enter correct otp",
+                            "Please Enter correct otp (LENGTH OF NUMBERS)",
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -80,8 +79,8 @@ class VerificationFragment : Fragment() {
                 }
             }
 
-            btnRegister.setOnClickListener {
-                resentVerificationCode()
+            resentOtp.setOnClickListener {
+                resentVerificationCode(phoneNumber, resendingToken)
                 resendOTPvVisibility()
             }
         }
@@ -95,7 +94,6 @@ class VerificationFragment : Fragment() {
                     Log.d(ContentValues.TAG, "signInWithCredential:success")
                     Toast.makeText(requireContext(), "Authenticate successfully", Toast.LENGTH_LONG)
                         .show()
-
                 } else {
                     // Sign in failed, display a message and update the UI
                     Log.d(
@@ -104,7 +102,6 @@ class VerificationFragment : Fragment() {
                     )
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
-
                         Toast.makeText(requireContext(), "Incorrect otp", Toast.LENGTH_LONG)
                             .show()
                     }
@@ -114,22 +111,40 @@ class VerificationFragment : Fragment() {
     }
 
     private fun collectOtpFromEditTexts(): String {
-        val otp = binding.apply {
-            et1.text.toString() + et2.text.toString() + et3.text.toString() + et4.text.toString() +
-                    et5.text.toString() + et6.text.toString()
-        }
+//        val otp = binding.apply {
+//            et1.text.toString() + et2.text.toString() + et3.text.toString() + et4.text.toString() +
+//                    et5.text.toString() + et6.text.toString()
+//        }
 
-        return otp.toString()
+        val OTP = binding.et1.text.toString() +
+                binding.et2.text.toString() +
+                binding.et3.text.toString() +
+                binding.et4.text.toString() +
+                binding.et5.text.toString() +
+                binding.et6.text.toString()
+
+        return OTP
     }
 
-    private fun resentVerificationCode() {
+    private fun sendVerificationCode(number: String) {
         val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(phoneNumber)       // Phone number to verify
+            .setPhoneNumber(number)       // Phone number to verify
             .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
             /** May be an error bellow**/
             .setActivity(requireActivity())                 // Activity (for callback binding)
             .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
-            .setForceResendingToken(resendingToken)
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
+    }
+
+    private fun resentVerificationCode(number: String, token: ForceResendingToken) {
+        val options = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber(number)       // Phone number to verify
+            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+            /** May be an error bellow**/
+            .setActivity(requireActivity())                 // Activity (for callback binding)
+            .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
+            .setForceResendingToken(token)
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
@@ -224,7 +239,6 @@ class VerificationFragment : Fragment() {
                 R.id.et_4 -> if (text.length == 1) binding.et5.requestFocus() else if (text.isEmpty()) binding.et3.requestFocus()
                 R.id.et_5 -> if (text.length == 1) binding.et6.requestFocus() else if (text.isEmpty()) binding.et4.requestFocus()
                 R.id.et_6 -> if (text.isEmpty()) binding.et5.requestFocus()
-
             }
         }
     }
