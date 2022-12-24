@@ -2,6 +2,7 @@ package com.example.greenwichfirebaseauth
 
 import android.content.ContentValues
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
 import android.text.Editable
@@ -18,9 +19,14 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.PhoneAuthProvider.ForceResendingToken
+import kotlinx.android.synthetic.main.fragment_verification.*
 import java.util.concurrent.TimeUnit
 
 class VerificationFragment : Fragment() {
+
+    companion object {
+        private const val SECONDS: Long = 10000
+    }
 
     private lateinit var binding: FragmentVerificationBinding
     private lateinit var auth: FirebaseAuth
@@ -51,6 +57,8 @@ class VerificationFragment : Fragment() {
         addTextChangeListener()
         clickListeners()
         resendOTPvVisibility()
+
+        binding.tvPhoneNumber.text = phoneNumber
     }
 
     private fun clickListeners() {
@@ -201,13 +209,15 @@ class VerificationFragment : Fragment() {
             et4.setText("")
             et5.setText("")
             et6.setText("")
-            resentOtp.visibility = View.INVISIBLE
+//            resentOtp.visibility = View.INVISIBLE
             resentOtp.isEnabled = false
+            countDownTimerForResendOTPButton()
 
             Handler(Looper.myLooper()!!).postDelayed(Runnable {
-                resentOtp.visibility = View.VISIBLE
+//                resentOtp.visibility = View.VISIBLE
+
                 resentOtp.isEnabled = true
-            }, 6000)
+            }, SECONDS)
         }
     }
 
@@ -222,6 +232,18 @@ class VerificationFragment : Fragment() {
         }
     }
 
+    private fun countDownTimerForResendOTPButton() {
+        object : CountDownTimer(SECONDS, 1000) {
+            override fun onTick(remaining: Long) {
+                resentOtp.text = "Отправить код повторно через ${remaining / 1000}"
+            }
+
+            override fun onFinish() {
+                resentOtp.text = "Отправить код повторно"
+            }
+        }
+    }
+
     inner class EditTextWatcher(private val view: View) : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
@@ -230,7 +252,6 @@ class VerificationFragment : Fragment() {
         }
 
         override fun afterTextChanged(p0: Editable?) {
-
             val text = p0.toString()
             when (view.id) {
                 R.id.et_1 -> if (text.length == 1) binding.et2.requestFocus()
